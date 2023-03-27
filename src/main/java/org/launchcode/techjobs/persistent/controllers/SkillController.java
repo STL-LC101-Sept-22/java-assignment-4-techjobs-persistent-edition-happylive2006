@@ -3,6 +3,7 @@ package org.launchcode.techjobs.persistent.controllers;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,13 @@ import java.util.Optional;
 @RequestMapping("skill")
 public class SkillController {
     @Autowired
-    private SkillRepository skillRepository;
+    EmployerRepository employerRepository;
+
+    @Autowired
+    JobRepository jobRepository;
+
+    @Autowired
+    SkillRepository skillRepository;
 
     @GetMapping("")
     public String index(Model model) {
