@@ -26,13 +26,13 @@ import java.util.Optional;
 @RequestMapping("skill")
 public class SkillController {
     @Autowired
-    EmployerRepository employerRepository;
+    private EmployerRepository employerRepository;
 
     @Autowired
-    JobRepository jobRepository;
+    private JobRepository jobRepository;
 
     @Autowired
-    SkillRepository skillRepository;
+    private SkillRepository skillRepository;
 
     @GetMapping("")
     public String index(Model model) {
@@ -56,7 +56,6 @@ public class SkillController {
             return "skill/add";
         }
         skillRepository.save(newSkill);
-        model.addAttribute("skill", skillRepository.findAll());
         return "redirect:";
     }
 
@@ -66,7 +65,7 @@ public class SkillController {
         Optional optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
-            model.addAttribute("employer", skill);
+            model.addAttribute("skill", skill);
             return "skill/view";
         } else {
             return "redirect:../";

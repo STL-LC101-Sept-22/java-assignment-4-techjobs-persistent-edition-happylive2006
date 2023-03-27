@@ -22,13 +22,13 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    EmployerRepository employerRepository;
+    private EmployerRepository employerRepository;
 
     @Autowired
-    JobRepository jobRepository;
+    private JobRepository jobRepository;
 
     @Autowired
-    SkillRepository skillRepository;
+    private SkillRepository skillRepository;
     @RequestMapping("")
     public String index(Model model) {
 
@@ -57,7 +57,7 @@ public class HomeController {
         Employer newEmployer = employerRepository.findById(employerId).orElse(new Employer());
         newJob.setEmployer(newEmployer);
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-//        newJob.setSkills(skillObjs);
+        newJob.setSkills(skillObjs);
         jobRepository.save(newJob);
         model.addAttribute("job", jobRepository.findAll());
         return "redirect:";
